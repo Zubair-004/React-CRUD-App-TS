@@ -1,82 +1,63 @@
 import * as React from 'react';
-import { useContext, useState, useEffect } from 'react';
-import { GlobalContext } from '../context/GlobalState';
-import {v4 as uuid} from 'uuid';
-import {Link, useHistory} from 'react-router-dom';
+// import { useContext, useState, useEffect } from 'react';
+// import { GlobalContext } from '../context/GlobalState';
 
 
 
-const UserForm = (props:any) => {
-    const [usr, setUsr] = useState({
-        id:uuid(), name:'', gender:'', age:''
-    });
+// const UserForm = (props:any) => {
 
-    const {editItem} = useContext(GlobalContext);
+    // const[userInfo, setUserInfo] = useState({});
+   
+    // const [usr, setUsr] = useState({
+    //     id:uuid(), name:'', gender:'', age:''
+    // });
 
-
-    useEffect(() => {
-        if(editItem!==null){
-            setUsr(editItem);
-        }else{
-            setUsr({id:'', name:'', gender:'', age:'' })
-        }
-    },[editItem]);
-
-
-    const history = useHistory();
-
-
-
-    interface UserObject{
-        id:string;
-        name:string;
-        gender:string;
-        age:number;
-    }
+    // const {editItem} = useContext(GlobalContext);
 
     // useEffect(() => {
-    //     const userId = currentUserId;
-    //     const selectedUser = users.find((user:UserObject)  => user.id === userId)
-    //     console.log(userId);
-    //     setUsr(selectedUser);
-    // },[currentUserId])
-
-
-
-    // let onSubmit;
-    // if(props.form ==="add"){
-    //      onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //         e.preventDefault();
-    //         addUser(usr);
+    //     if(editItem!==null){
+    //         setUsr(editItem);
+    //     }else{
+    //         setUsr({id:'', name:'', gender:'', age:'' })
     //     }
-    // }
-    // else{
-    //     onSubmit = () => {
-    //         editUser(usr);
-    //         history.push('/');  
-    //     }
+    // },[editItem]);
+
+    // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUsr({...usr, id:usr?.id, [e.target.name] : e.target.value});
+    //     {setUserInfo({...usr, id:usr?.id, [e.target.name] : e.target.value})}
+    //     {props.setUpdatedInfo && props.setUpdatedInfo({...usr, id:usr?.id, [e.target.name] : e.target.value})}
     // }
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsr({...usr, id:usr?.id, [e.target.name] : e.target.value});
-        {props.setUserInfo && props.setUserInfo({...usr, id:usr?.id, [e.target.name] : e.target.value})}
-        {props.setUpdatedInfo && props.setUpdatedInfo({...usr, id:usr?.id, [e.target.name] : e.target.value})}
-    }
-    return (
-            
-              <form>
-                <div style={{width:"200%"}}>
-                    <label style={{color:"white"}}>Name*</label><br/>
-                    <input required type="text" name="name" value={usr?.name} onChange = {onChange} /><br/><br/>
-                    <label style={{color:"white"}}>Gender*</label><br/>
-                    <input required type="text" name="gender" value={usr?.gender} onChange = {onChange}/><br/><br/>
-                    <label style={{color:"white"}}>Age*</label><br/>
-                    <input required type="number" name="age" value={usr?.age} onChange = {onChange} min="0"/><br/><br/>
-                </div>
-               {/* {props.form === "add" ? <button type="submit">Add</button>: <button type="submit">Update</button>} */}
-              </form>
-            
-    )
-}
+    const formConfig = [
+        {
+        type : 'text',
+        valueKey : 'name',
+        fieldProps : { label : 'Name' , fullWidth: true , name: 'name'} ,
+        },
+        {
+        type : 'text',
+        valueKey : 'gender',
+        fieldProps : { label : 'Gender' , fullWidth: true  , name: 'gender' } ,
+        },
+        {
+        type : 'text',
+        valueKey : 'age',
+        fieldProps : { label : 'Age' , fullWidth: true , name: 'age' } ,
+        }
+     ];
+    // const myInitialValues = [{ name : usr?.name, gender: usr?.gender, age: usr?.age }];
+    export default formConfig;
 
-export default UserForm;
+        
+            
+            //   <form>
+            //     <div style={{width:"200%"}}>
+            //         <label style={{color:"white"}}>Name*</label><br/>
+            //         <input required type="text" name="name" value={usr?.name} onChange = {onChange} /><br/><br/>
+            //         <label style={{color:"white"}}>Gender*</label><br/>
+            //         <input required type="text" name="gender" value={usr?.gender} onChange = {onChange}/><br/><br/>
+            //         <label style={{color:"white"}}>Age*</label><br/>
+            //         <input required type="number" name="age" value={usr?.age} onChange = {onChange} min="0"/><br/><br/>
+            //     </div>
+            // {props.form === "add" ? <button type="submit">Add</button>: <button type="submit">Update</button>}
+            //  </form>
